@@ -1398,7 +1398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb2d: {fileID: 315171610}
-  canMove: 0
+  canMove: 1
   canJump: 0
   canDash: 0
   isgrounded: 0
