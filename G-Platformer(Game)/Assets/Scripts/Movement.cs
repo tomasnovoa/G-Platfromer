@@ -1,32 +1,64 @@
+using System;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
- [SerializeField] private  Rigidbody2D rb2d;
- [SerializeField] private bool canMove, canJump, canDash, isgrounded;
- [SerializeField] KeyCode shootButton, jumpButton, dashButton;
- public float velocidadMovimiento;
-  float horizontal;
+    [Header("Movimiento")]
+    public float velocidadMovimiento;
+    public float fuerzaSalto;
 
+    [Header("Detección de suelo")]
+    public Transform puntoSuelo;
+    public float radioDeteccion = 0.2f;
+    public LayerMask capaSuelo;
+
+    private Rigidbody2D rb;
+    private bool estaEnSuelo;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     void Update()
     {
         Move();
+        Detector();
+        Jump();
+        
     }
     void Move()
     {
-        
-         if (canMove == true)
+        float direccion = 0f;
+        if (Input.GetKey(KeyCode.A))
         {
-            horizontal = Input.GetAxis("Horizontal") * velocidadMovimiento;
+            direccion = -1f;
         }
-        else
+        else if (Input.GetKey(KeyCode.D))
         {
-            horizontal = 0;
+            direccion = 1f;
         }
-            
-       
+
+        rb.linearVelocity = new Vector2(direccion * velocidadMovimiento, rb.linearVelocityY);
     }
-
-
+    void Detector()
+    {
+        estaEnSuelo = Physics2D.OverlapCircle(puntoSuelo.position, radioDeteccion, capaSuelo);
+    }
+    void Jump()
+    {
+        // Salto
+        if (Input.GetButtonDown("Jump") && estaEnSuelo)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocityY, fuerzaSalto);
+        }
+    }
+ 
 }
+
+
+
+
+
+
+
