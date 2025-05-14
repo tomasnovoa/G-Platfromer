@@ -3,12 +3,11 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [Header("Movimiento")]
+    public Animator animator;
+ 
     public float velocidadMovimiento;
     public float fuerzaSalto;
-
-    [Header("Detección de suelo")]
-    public Transform puntoSuelo;
+     public Transform puntoSuelo;
     public float radioDeteccion = 0.2f;
     public LayerMask capaSuelo;
 
@@ -32,14 +31,23 @@ public class Movement : MonoBehaviour
         float direccion = 0f;
         if (Input.GetKey(KeyCode.A))
         {
+            animator.SetBool("InMove",true);
             direccion = -1f;
         }
         else if (Input.GetKey(KeyCode.D))
         {
+            animator.SetBool("InMove",true);
             direccion = 1f;
         }
 
         rb.linearVelocity = new Vector2(direccion * velocidadMovimiento, rb.linearVelocityY);
+
+
+      if(rb.linearVelocity.magnitude == 0f)
+      {
+        animator.SetBool("InMove",false);
+      }
+
     }
     void Detector()
     {
@@ -47,7 +55,7 @@ public class Movement : MonoBehaviour
     }
     void Jump()
     {
-        // Salto
+      
         if (Input.GetButtonDown("Jump") && estaEnSuelo)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocityY, fuerzaSalto);
