@@ -13,6 +13,7 @@ public class Movement : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool estaEnSuelo;
+    bool preparandoSalto;
 
     void Start()
     {
@@ -55,10 +56,19 @@ public class Movement : MonoBehaviour
     }
     void Jump()
     {
-      
         if (Input.GetButtonDown("Jump") && estaEnSuelo)
         {
+           
+            animator.SetBool("HoldJump", true);
+            preparandoSalto = true;
+        }
+
+        if (Input.GetButtonUp("Jump") && estaEnSuelo && preparandoSalto)
+        {
+            animator.SetTrigger("InJump");
+            animator.SetBool("HoldJump", false);
             rb.linearVelocity = new Vector2(rb.linearVelocityY, fuerzaSalto);
+            preparandoSalto = false;
         }
     }
  
