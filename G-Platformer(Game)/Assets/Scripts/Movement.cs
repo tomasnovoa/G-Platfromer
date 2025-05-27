@@ -19,7 +19,7 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
-        canMove = true ;
+        NoMoverse();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -61,9 +61,17 @@ public class Movement : MonoBehaviour
     {
         estaEnSuelo = Physics2D.OverlapCircle(puntoSuelo.position, radioDeteccion, capaSuelo);
     }
+    public void Moverse()
+    {
+        canMove = true;
+    }
+    public void NoMoverse()
+    {
+        canMove = false;
+    }
     void Jump()
     {
-        if (Input.GetButtonDown("Jump") && estaEnSuelo)
+        if (Input.GetButtonDown("Jump") && estaEnSuelo && canMove)
         {
            
             animator.SetBool("HoldJump", true);
@@ -73,7 +81,7 @@ public class Movement : MonoBehaviour
             preparandoSalto = true;
         }
 
-        if (Input.GetButtonUp("Jump") && estaEnSuelo && preparandoSalto)
+        if (Input.GetButtonUp("Jump") && estaEnSuelo && preparandoSalto && canMove)
         {
             animator.SetTrigger("InJump");
             animator.SetBool("HoldJump", false);
