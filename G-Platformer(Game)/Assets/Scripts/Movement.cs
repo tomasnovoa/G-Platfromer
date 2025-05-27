@@ -3,20 +3,23 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    public bool canMove;
     public Animator animator;
  
     public float velocidadMovimiento;
     public float fuerzaSalto;
-     public Transform puntoSuelo;
+    public Transform puntoSuelo;
     public float radioDeteccion = 0.2f;
     public LayerMask capaSuelo;
 
     private Rigidbody2D rb;
     private bool estaEnSuelo;
-    bool preparandoSalto;
+  
+    private bool preparandoSalto;
 
     void Start()
     {
+        canMove = true ;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -30,15 +33,19 @@ public class Movement : MonoBehaviour
     void Move()
     {
         float direccion = 0f;
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && canMove)
         {
             animator.SetBool("InMove",true);
             direccion = -1f;
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) && canMove)
         {
             animator.SetBool("InMove",true);
             direccion = 1f;
+        }
+        else if (!canMove)
+        {
+            direccion=0f;
         }
 
         rb.linearVelocity = new Vector2(direccion * velocidadMovimiento, rb.linearVelocityY);
@@ -60,6 +67,9 @@ public class Movement : MonoBehaviour
         {
            
             animator.SetBool("HoldJump", true);
+
+            
+ 
             preparandoSalto = true;
         }
 
