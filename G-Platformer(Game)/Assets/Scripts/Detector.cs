@@ -9,6 +9,10 @@ public class Detector : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D collision)
     {
-        action.Invoke();
+        
+        
+            action.Invoke();
+        
+        
     }
 }
