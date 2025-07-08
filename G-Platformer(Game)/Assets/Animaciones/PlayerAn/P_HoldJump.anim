@@ -303,14 +303,21 @@ AnimationClip:
     functionName: holdJump
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0.1
+    floatParameter: 0.15
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.033333335
+    functionName: holdJump
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0.3
     intParameter: 0
     messageOptions: 0
   - time: 0.083333336
     functionName: holdJump
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0.5
+    floatParameter: 0.7
     intParameter: 0
     messageOptions: 0
   - time: 0.15
