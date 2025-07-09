@@ -7,6 +7,7 @@ public class UiManager : MonoBehaviour
 
     [Header("General UI Panels")]
     public GameObject mainMenuPanel;
+    public Animator Menuanimator;
     public GameObject pauseMenuPanel;
     public GameObject gameUIPanel;
    
@@ -45,7 +46,30 @@ public class UiManager : MonoBehaviour
         UpdateVolumeUI();
     }
 
+    private void Update()
+    {
+        Pause();
+    }
     #region Panel Management
+
+    public void ExitGame()
+    {
+        Debug.Log("Saliendo del juego...");
+        Application.Quit();
+
+#if UNITY_EDITOR
+        // Si estás en el editor, para que funcione al testear:
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+    }
+
+    public void Pause()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Menuanimator.SetTrigger("Pause");
+        }
+    }
 
     public void ShowPanel(GameObject panel)
     {

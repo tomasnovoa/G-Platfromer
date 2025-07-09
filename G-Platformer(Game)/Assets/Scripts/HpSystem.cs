@@ -11,6 +11,7 @@ public class HpSystem : MonoBehaviour
     public void TakeDamage(int damage)
     {
         hp -= damage;
+        AudioManager.Instance.PlaySFX("Dead");
         CheckHP();
     }
 

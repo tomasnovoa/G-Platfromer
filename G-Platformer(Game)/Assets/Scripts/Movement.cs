@@ -89,9 +89,10 @@ public class Movement : MonoBehaviour
             float value = fuerzaSalto * currentJumpForce;
             rb.linearVelocity = new Vector2(rb.linearVelocityY, value);
             preparandoSalto = false;
+            AudioManager.Instance.PlaySFX("Jump");
         }
     }
-
+   
     public void holdJump(float valor)
     {
         currentJumpForce = valor;

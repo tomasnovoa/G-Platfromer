@@ -11,7 +11,7 @@ public class PlayerColl : MonoBehaviour
 
         if (collision.CompareTag(eltag))
         {
-           
+            
             onEnter.Invoke();
         }
 

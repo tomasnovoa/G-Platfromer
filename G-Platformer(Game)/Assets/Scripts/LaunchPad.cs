@@ -17,7 +17,7 @@ public class LaunchPad : MonoBehaviour
                 rb2d.linearVelocity = new Vector2(rb2d.linearVelocityX, 0f);
                 rb2d.AddForce(Vector2.up * fuerza, ForceMode2D.Impulse);
                 animator.Play("Jumper");
-                
+                AudioManager.Instance.PlaySFX("Jumpad");
             }
         }
     }
